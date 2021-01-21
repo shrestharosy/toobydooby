@@ -48,7 +48,7 @@ const mockData = [
         title: "Mandarin",
         quantity: 2,
         unit: "kg",
-        completed: false,
+        completed: true,
       },
       {
         title: "Water melon",

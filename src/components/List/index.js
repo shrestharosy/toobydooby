@@ -3,6 +3,21 @@ import { StyleSheet, Text, View } from "react-native";
 import colors from "../../constants/colors";
 
 const ListItem = ({ item }) => {
+  const currentCount = item.todos.reduce(
+    (acc, current) => {
+      if (current.completed) {
+        acc.completed = acc.completed + 1;
+      } else {
+        acc.remaining = acc.remaining + 1;
+      }
+      return acc;
+    },
+    {
+      completed: 0,
+      remaining: 0,
+    }
+  );
+
   return (
     <View style={[styles.container, { backgroundColor: item.color }]}>
       <Text style={styles.title}>{item.name}</Text>
@@ -14,11 +29,11 @@ const ListItem = ({ item }) => {
           }}
         >
           <View style={{ alignItems: "center", marginRight: 20 }}>
-            <Text style={styles.count}>0</Text>
+            <Text style={styles.count}>{currentCount.remaining}</Text>
             <Text style={styles.subtitle}>Remaining</Text>
           </View>
           <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>0</Text>
+            <Text style={styles.count}>{currentCount.completed}</Text>
             <Text style={styles.subtitle}>Completed</Text>
           </View>
         </View>
