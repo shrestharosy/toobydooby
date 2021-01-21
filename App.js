@@ -1,8 +1,15 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+} from "react-native";
 import colors from "./src/constants/colors";
 import { AntDesign } from "@expo/vector-icons";
+import mockData from "./src/mock";
+import ListItem from "./src/components/List";
 
 export default function App() {
   return (
@@ -12,12 +19,20 @@ export default function App() {
         <Text style={styles.title}>ToobyDooby</Text>
         <View style={styles.divider}></View>
       </View>
-      <View style={{ marginVertical: 48 }}>
+      <View style={{ marginVertical: 10 }}>
         <TouchableOpacity style={styles.addButton}>
           <AntDesign name={"plus"} size={20} color={colors.blue} />
         </TouchableOpacity>
+      </View>
 
-        {/* <Text style={styles.add}>Add List</Text> */}
+      <View style={{ height: 550, paddingLeft: 32 }}>
+        <FlatList
+          data={mockData}
+          keyExtractor={(item) => item.name}
+          vertical={true}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => <ListItem item={item} />}
+        />
       </View>
     </View>
   );
@@ -41,6 +56,7 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: colors.li,
     paddingHorizontal: 40,
+    paddingBottom: 20,
   },
   addButton: {
     borderWidth: 2,
