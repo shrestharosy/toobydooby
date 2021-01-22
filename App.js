@@ -1,34 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   FlatList,
+  Modal,
 } from "react-native";
 import colors from "./src/constants/colors";
 import { AntDesign } from "@expo/vector-icons";
 import mockData from "./src/mock";
 import ListItem from "./src/components/List";
+import CustomModal from "./src/components/CustomModal";
 
 export default function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
+      <Modal
+        animationType={"slide"}
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <CustomModal closeModal={() => setIsModalVisible(false)} />
+      </Modal>
       <View style={{ flexDirection: "row" }}>
-        <View style={styles.divider}></View>
-        <Text style={styles.title}>ToobyDooby</Text>
-        <View style={styles.divider}></View>
+        <Text style={styles.title}>My Shopping Lists</Text>
       </View>
+
       <View style={{ marginVertical: 10 }}>
-        <TouchableOpacity style={styles.addButton}>
-          <AntDesign name={"plus"} size={20} color={colors.blue} />
+        <TouchableOpacity
+          // style={styles.addButton}
+          onPress={() => setIsModalVisible(true)}
+        >
+          <View style={styles.addListContainer}>
+            <Text>Plan a new shopping trip</Text>
+          </View>
+          {/* <AntDesign name={"plus"} size={20} color={colors.blue} /> */}
         </TouchableOpacity>
       </View>
 
-      <View style={{ height: 550, paddingLeft: 32 }}>
+      <View style={{ height: 550 }}>
         <FlatList
           data={mockData}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item, index) => index}
           vertical={true}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <ListItem item={item} />}
@@ -52,11 +68,23 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   title: {
-    fontSize: 38,
-    fontWeight: "800",
+    fontSize: 20,
+    fontWeight: "400",
     color: colors.li,
     paddingHorizontal: 40,
     paddingBottom: 20,
+  },
+  addListContainer: {
+    paddingVertical: 32,
+    paddingHorizontal: 16,
+    borderRadius: 6,
+    marginHorizontal: 12,
+    marginVertical: 12,
+    alignItems: "center",
+    width: 350,
+    borderWidth: 2,
+    borderColor: colors.lightBlue,
+    borderStyle: "dashed",
   },
   addButton: {
     borderWidth: 2,

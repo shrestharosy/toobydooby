@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import colors from "../../constants/colors";
+import Card from "../Card";
 
 const ListItem = ({ item }) => {
   const currentCount = item.todos.reduce(
@@ -19,7 +20,7 @@ const ListItem = ({ item }) => {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: item.color }]}>
+    <Card color={item.color}>
       <Text style={styles.title}>{item.name}</Text>
       <View>
         <View
@@ -38,20 +39,11 @@ const ListItem = ({ item }) => {
           </View>
         </View>
       </View>
-    </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 32,
-    paddingHorizontal: 16,
-    borderRadius: 6,
-    marginHorizontal: 12,
-    marginVertical: 12,
-    alignItems: "center",
-    width: 200,
-  },
   title: {
     fontSize: 24,
     fontWeight: "700",
