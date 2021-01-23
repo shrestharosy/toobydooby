@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  FlatList,
-  Modal,
-} from "react-native";
+import { StyleSheet, View, Modal } from "react-native";
 import colors from "./src/constants/colors";
-import { AntDesign } from "@expo/vector-icons";
-import mockData from "./src/mock";
-import ListItem from "./src/components/List";
 import CustomModal from "./src/components/CustomModal";
+import Create from "./src/scenes/List/Create";
+import ListView from "./src/scenes/List";
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,33 +15,12 @@ export default function App() {
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}
       >
-        <CustomModal closeModal={() => setIsModalVisible(false)} />
+        <CustomModal closeModal={() => setIsModalVisible(false)}>
+          <Create />
+        </CustomModal>
       </Modal>
-      <View style={{ flexDirection: "row" }}>
-        <Text style={styles.title}>My Shopping Lists</Text>
-      </View>
 
-      <View style={{ marginVertical: 10 }}>
-        <TouchableOpacity
-          // style={styles.addButton}
-          onPress={() => setIsModalVisible(true)}
-        >
-          <View style={styles.addListContainer}>
-            <Text>Plan a new shopping trip</Text>
-          </View>
-          {/* <AntDesign name={"plus"} size={20} color={colors.blue} /> */}
-        </TouchableOpacity>
-      </View>
-
-      <View style={{ height: 550 }}>
-        <FlatList
-          data={mockData}
-          keyExtractor={(item, index) => index}
-          vertical={true}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => <ListItem item={item} />}
-        />
-      </View>
+      <ListView showModal={() => setIsModalVisible(true)} />
     </View>
   );
 }

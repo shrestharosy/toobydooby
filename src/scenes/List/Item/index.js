@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import colors from "../../constants/colors";
-import Card from "../Card";
+
+import Card from "../../../components/Card";
+import colors from "../../../constants/colors";
 
 const ListItem = ({ item }) => {
   const currentCount = item.todos.reduce(
