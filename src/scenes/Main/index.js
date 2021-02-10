@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Modal } from "react-native";
 
-import colors from "./src/constants/colors";
-import CustomModal from "./src/components/CustomModal";
-import Create from "./src/scenes/List/Create";
-import ListView from "./src/scenes/List";
+import colors from "../../constants/colors";
+import CustomModal from "../../components/CustomModal";
 
-export default function App() {
+const Main = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
@@ -24,7 +22,9 @@ export default function App() {
       <ListView showModal={() => setIsModalVisible(true)} />
     </View>
   );
-}
+};
+
+export default Main;
 
 const styles = StyleSheet.create({
   container: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "400",
-    color: colors.li,
+    color: colors.lightBlue,
     paddingHorizontal: 40,
     paddingBottom: 20,
   },

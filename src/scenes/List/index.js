@@ -14,11 +14,7 @@ const ListView = (props) => {
   const { showModal } = props;
   return (
     <>
-      <View style={{ flexDirection: "row" }}>
-        <Text style={styles.title}>My Shopping Lists</Text>
-      </View>
-
-      <View style={{ marginVertical: 10 }}>
+      <View>
         <TouchableOpacity onPress={showModal}>
           <View style={styles.addListContainer}>
             <Text>Plan a new shopping trip</Text>
@@ -26,7 +22,7 @@ const ListView = (props) => {
         </TouchableOpacity>
       </View>
 
-      <View style={{ height: 550 }}>
+      <View style={{ height: 600 }}>
         <FlatList
           data={mockData}
           keyExtractor={(item, index) => index.toString()}
